@@ -5,6 +5,9 @@ import cv2
 import tensorflow as tf
 import matplotlib.pyplot as plt
 
+
+
+
 def get_classes(matriz):
     res = []
     for v in [x[2] for x in matriz]:
