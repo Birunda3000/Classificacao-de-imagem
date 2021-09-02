@@ -13,6 +13,9 @@ def get_classes(matriz):
             res.append(v)
     return res
 
+
+
+
 def prep_data(data, CATEGORIES, IMG_SIZE, numero_de_canais):
     random.shuffle(data)
     X = []
@@ -20,9 +23,26 @@ def prep_data(data, CATEGORIES, IMG_SIZE, numero_de_canais):
     for features, label, name in data:
         X.append(features)
         y.append(label)
+    
+    
     res = np.eye(  len(CATEGORIES)  )[y]
+    
+#--------------------------------------------------------------------------
+    
+    #print('Shape dos dados[0]: ', np.array(X)[0].shape)
+    print('Shape dos dados: ', np.array(X).shape)
+    
+    
     X = np.array(X).reshape(-1, IMG_SIZE, IMG_SIZE, numero_de_canais)
+    
+
+#--------------------------------------------------------------------------
     return X, res
+
+
+
+
+
 
 def prepare(filepath):
     img_array = cv2.imread(filepath, cv2.IMREAD_GRAYSCALE)
