@@ -3,3 +3,8 @@
 * http://www.cs.utoronto.ca/~kriz/cifar.html - CIFAR-10
 * mnist
 * FASHION-mnist
+
+# Dificuldades
+* Avião pousado
+* Carro vs Truck
+* Cão vs Gato vs Veado
