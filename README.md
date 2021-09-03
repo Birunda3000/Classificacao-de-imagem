@@ -15,3 +15,6 @@ Reune scripts uteis para trabalho em reconhecimento de imagens usando tensorflow
 ../bases/pickle/imagem
 
 ../modelos_salvos/tensorflow
+
+adicionar
+* graph network
