@@ -13,11 +13,11 @@ def get_classes(matriz):
             res.append(v)
     return res
 
-
-
-
-def prep_data(data, CATEGORIES, IMG_SIZE, numero_de_canais):
-    random.shuffle(data)
+def prep_data(data, CATEGORIES, IMG_SIZE, numero_de_canais, shuffle=True):
+    
+    if shuffle:
+        random.shuffle(data)
+    
     X = []
     y = []
     for features, label, name in data:
@@ -30,18 +30,16 @@ def prep_data(data, CATEGORIES, IMG_SIZE, numero_de_canais):
 #--------------------------------------------------------------------------
     
     #print('Shape dos dados[0]: ', np.array(X)[0].shape)
-    print('Shape dos dados: ', np.array(X).shape)
-    
+    #print('Shape de entrada dos dados: ', np.array(X).shape)
     
     X = np.array(X).reshape(-1, IMG_SIZE, IMG_SIZE, numero_de_canais)
-    
+    #X = np.array(X)
 
+
+    
+    #print('Shape de saida dos dados: ', np.array(X).shape)
 #--------------------------------------------------------------------------
     return X, res
-
-
-
-
 
 
 def prepare(filepath):
