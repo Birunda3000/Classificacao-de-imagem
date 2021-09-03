@@ -3,8 +3,8 @@ Reune scripts uteis para trabalho em reconhecimento de imagens usando tensorflow
 
 ## Ordem de execução
 1. Leitura da base
-2. Script de treinamento
-3. Exibindo filtros | Usando o modelo
+2. Script de treinamento | Script de treinamento com aug
+3. Exibindo filtros | Usando o modelo | Avaliando modelo
 
 .. = voltar uma pasta
 
