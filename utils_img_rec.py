@@ -26,7 +26,7 @@ def prep_data(data, CATEGORIES, IMG_SIZE, numero_de_canais, shuffle=True):
     
     
     res = np.eye(  len(CATEGORIES)  )[y]
-    
+
 #--------------------------------------------------------------------------
     
     #print('Shape dos dados[0]: ', np.array(X)[0].shape)
