@@ -1,5 +1,5 @@
 # Reconhecimento-de-imagem
-Reune scripts uteis para trabalho em reconhecimento de imagens usando tensorflow.keras
+Reune scripts uteis para trabalho em classificação de imagens usando tensorflow.keras
 
 ## Ordem de execução
 1. Leitura da base
