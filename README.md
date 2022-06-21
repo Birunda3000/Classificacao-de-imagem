@@ -1,4 +1,4 @@
-# Reconhecimento-de-imagem
+# Classificação-de-imagem
 Reune scripts uteis para trabalho em classificação de imagens usando tensorflow.keras
 
 ## Ordem de execução
