@@ -1,0 +1,45 @@
+# === Núcleo de Análise e Machine Learning ===
+# Bibliotecas para manipulação de dados e o framework de ML.
+numpy
+pandas
+scikit-learn
+tensorflow
+
+# === Processamento de Imagem e Visão Computacional ===
+# Ferramentas essenciais para carregar, manipular e processar imagens.
+Pillow
+opencv-python
+imageio
+
+# === Computação Paralela (Opcional, mas útil) ===
+# Ferramentas do projeto anterior para acelerar o processamento.
+# Podem ser úteis para pré-processamento pesado de imagens.
+dask[complete]
+numba
+
+# === Visualização de Dados ===
+# Ferramentas para criar os gráficos e plots.
+matplotlib
+seaborn
+tensorflow-docs
+
+# === Ambiente Jupyter e Notebooks ===
+# Pacotes para rodar e gerenciar o ambiente de notebook interativo.
+jupyterlab
+ipykernel
+ipywidgets
+jupyter_client
+nbformat
+
+# === Qualidade de Código e Ferramentas de Desenvolvimento ===
+# Linters, formatadores e utilitários para manter o código limpo e legível.
+# Recomenda-se escolher um formatador (black é o padrão) e um linter (flake8).
+black
+flake8
+pylint
+isort
+debugpy
+tqdm
+
+# === Verificação de ambiente ===
+psutil

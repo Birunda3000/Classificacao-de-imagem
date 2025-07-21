@@ -1,0 +1,61 @@
+
+================================================================================
+### INÍCIO DO DIAGNÓSTICO AVANÇADO DO AMBIENTE ###
+Timestamp: 2025-07-21 15:19:05
+--------------------------------------------------------------------------------
+
+[INFO] Verificando ambiente de execução...
+  - [SUCESSO] Script a ser executado dentro de um container Docker.
+
+[INFO] Verificando recursos de hardware...
+  - CPU:
+    - Modelo: x86_64
+    - Núcleos Físicos: 6
+    - Núcleos Lógicos (Threads): 12
+    - Frequência Atual: 2592.00 Mhz
+    - Frequência Máxima: 0.00 Mhz
+  - Memória RAM:
+    - Total: 7.64 GB
+    - Disponível: 4.58 GB
+    - Usada: 2.78 GB (40.1%)
+  - Disco (Partição Raiz '/'):
+    - Total: 1006.85 GB
+    - Usado: 48.66 GB
+    - Livre: 906.98 GB (5.1%)
+
+[INFO] Verificando versões do sistema e bibliotecas...
+  - Versão do TensorFlow: 2.17.0
+  - Versão do Python: 3.12.3
+  - Sistema Operacional: Linux 5.15.153.1-microsoft-standard-WSL2
+
+[INFO] Verificando otimizações avançadas do TensorFlow...
+  - [SUCESSO] XLA (JIT Compilation) foi ativado e testado com sucesso.
+  - [SUCESSO] Mixed Precision (mixed_float16) foi ativada com sucesso.
+
+[INFO] Procurando por dispositivos GPU...
+  - [SUCESSO] 1 GPU(s) encontrada(s):
+    - GPU[0]: Nome: /physical_device:GPU:0, Tipo: GPU
+    - Versão CUDA (compilada com TF): 12.8
+    - Versão cuDNN (compilada com TF): 9
+
+[INFO] Iniciando teste de performance em: /CPU:0 (Matriz 8192x8192)
+  - [RESULTADO] Tempo de execução em /CPU:0: 2.1644 segundos.
+
+[INFO] Iniciando teste de performance em: /GPU:0 (Matriz 8192x8192)
+  - [RESULTADO] Tempo de execução em /GPU:0: 0.2916 segundos.
+
+[INFO] Verificando ambiente de execução...
+  - [SUCESSO] Script a ser executado dentro de um container Docker.
+
+================================================================================
+### DIAGNÓSTICO FINAL ###
+Timestamp: 2025-07-21 15:19:11
+--------------------------------------------------------------------------------
+✔️ Ambiente de Execução: Container Docker.
+✔️ Aceleração por GPU: Ativa e Testada.
+   - Tempo de execução na GPU: 0.2916s
+   - Tempo de execução na CPU: 2.1644s
+   - Otimização: A GPU é aproximadamente 7.42x mais rápida que a CPU.
+
+   >>> [AVALIAÇÃO GERAL]: SUCESSO! Ambiente otimizado para Deep Learning. <<<
+================================================================================

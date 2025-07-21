@@ -1,3 +1,68 @@
-*.ipynb_checkpoints
-*.vscode
-*.pyc
+# Dados - Substitua 'data_for_compose/' pelo nome exato da sua pasta de dados
+# se você a colocar dentro do repositório.
+# Ou, se você usar um nome genérico como 'data':
+
+data/
+*.pickle
+*.csv
+*.jpg
+*.png
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.so
+dist/
+build/
+*.manifest
+*.spec
+
+# Ambientes Virtuais
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak
+venv.bak
+
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+# Se você tiver notebooks com saídas muito grandes que não quer versionar:
+# *.ipynb # (CUIDADO: Isso ignora todos os notebooks. Geralmente você quer versionar os notebooks, mas talvez não as saídas deles. Limpar as saídas antes de commitar é uma alternativa)
+
+# Arquivos de IDE/Editor
+.vscode/ # Opcional: Alguns preferem versionar .vscode/settings.json ou launch.json se for útil para a equipe.
+         # .vscode/tasks.json
+         # .vscode/extensions.json
+# .idea/ (para PyCharm/IntelliJ)
+
+# Saídas geradas e Modelos (ajuste os nomes das pastas e extensões)
+output/
+generated_images/
+models/
+*.h5
+*.pth
+*.pt
+*.onnx
+# Se você salvar modelos como pickles e eles forem grandes:
+# model.pkl
+
+# Logs
+*.log
+logs/
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Docker (se você tiver arquivos locais que não devem ir para o repo)
+# .dockerignore (este é para o build do Docker, mas às vezes há arquivos relacionados)
+# docker-compose.override.yml (se tiver configurações locais)
+
+# Outros
+*.bak
+*.tmp
