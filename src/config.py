@@ -11,27 +11,37 @@ from typing import Union
 # 1. CONFIGURAÇÕES PRINCIPAIS (OS PONTOS A MUDAR)
 # ==============================================================================
 DATASET_NAME = "cifar10"
+PROJECT_NAME = f"{DATASET_NAME}_CNN"
 HAS_TRAIN_TEST_SPLIT = True
 
 
 class Debug:
     """Configurações para acelerar testes e depuração."""
 
-    SUBSET_SIZE_PER_CLASS: Union[int, None] = 20  # Mantenha em 20 para o teste
+    SUBSET_SIZE_PER_CLASS: Union[int, None] = None  # Mantenha em 20 para o teste
 
 
 class Model:
     """Configurações da imagem."""
 
-    IMG_SIZE: Union[int, str] = 32
+    IMG_SIZE: Union[int, str] = 64
     CHANNELS = 3
 
+class Training:
+    """Hiperparâmetros para o processo de treino."""
+
+    EPOCHS = 1000
+    BATCH_SIZE = 32
+    LEARNING_RATE = 0.001
+    LOSS = "categorical_crossentropy"
+    OPTIMIZER = "adam"
 
 # ==============================================================================
 # 2. VARIÁVEIS AUTOMATIZADAS (NÃO PRECISA DE MUDAR)
 # ==============================================================================
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data" / DATASET_NAME
+TIMESTAMP = datetime.now().strftime("%Y-%m-%d_%Hh%Mm%Ss")
 
 if HAS_TRAIN_TEST_SPLIT:
     PATH_TRAIN = DATA_DIR / "train"
@@ -48,10 +58,6 @@ except FileNotFoundError:
     CLASS_NAMES = []
     NUM_CLASSES = 0
 
-PROJECT_NAME = f"{DATASET_NAME}_CNN"
-TIMESTAMP = datetime.now().strftime("%Y-%m-%d_%Hh%Mm%Ss")
-
-
 class Paths:
     """Organiza todos os caminhos de saída do projeto."""
 
@@ -62,17 +68,6 @@ class Paths:
 
     # O modelo será salvo dentro da pasta temporária
     MODEL_FILE = TMP_RUN_DIR / "model.h5"
-
-
-class Training:
-    """Hiperparâmetros para o processo de treino."""
-
-    EPOCHS = 5  # Reduzi para 5 para um teste rápido
-    BATCH_SIZE = 64
-    LEARNING_RATE = 0.001
-    LOSS = "categorical_crossentropy"
-    OPTIMIZER = "adam"
-
 
 class Augmentation:
     """Parâmetros para o aumento de dados."""

@@ -462,15 +462,22 @@ TCC_GAN/
 │   ├── vizualizando_filtro.ipynb
 │   └── zzresto de codigo.ipynb
 ├── output
-│   ├── _tmp_cifar10_CNN_2025-07-21_14h49m59s
-│   ├── cifar10_CNN_2025-07-21_14h23m35s_173ms
-│   ├── cifar10_CNN_2025-07-21_14h25m37s_934ms
-│   ├── cifar10_CNN_2025-07-21_14h27m03s_277ms
-│   ├── cifar10_CNN___val_acc=0.1650___2025-07-21_14h47m20s
+│   ├── _tmp_cifar10_CNN_2025-07-21_18h43m36s
+│   ├── _tmp_cifar10_CNN_2025-07-21_18h48m44s
+│   ├── cifar10_CNN___val_acc=0.7061___2025-07-21_16h00m24s
 │   │   ├── model.h5
 │   │   ├── report.txt
 │   │   └── training_history.png
-│   └── cifar10_CNN___val_acc=0.2300___2025-07-21_14h27m28s_458ms
+│   ├── cifar10_CNN___val_acc=0.7538___2025-07-21_15h51m41s
+│   │   ├── model.h5
+│   │   ├── report.txt
+│   │   └── training_history.png
+│   └── cifar10_CNN___val_acc=0.8550___2025-07-21_17h13m34s
+│       ├── logs
+│       │   ├── train
+│       │   │   └── events.out.tfevents.1753118017.602f00cb4cb0.331867.0.v2
+│       │   └── validation
+│       │       └── events.out.tfevents.1753118469.602f00cb4cb0.331867.1.v2
 │       ├── model.h5
 │       ├── report.txt
 │       └── training_history.png

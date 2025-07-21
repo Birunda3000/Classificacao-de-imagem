@@ -7,15 +7,8 @@ usando os valores do ficheiro config.py como padrão (injeção de dependência)
 """
 import tensorflow as tf
 from tensorflow.keras.models import Sequential, Model
-from tensorflow.keras.layers import (
-    Input,
-    Conv2D,
-    MaxPooling2D,
-    Flatten,
-    Dense,
-    Dropout,
-    BatchNormalization,
-)
+import tensorflow.keras.layers as layers
+from tensorflow.keras import regularizers
 from typing import Tuple
 
 # Importa as configurações do projeto para usar como valores padrão
@@ -51,22 +44,26 @@ def build_cnn(
 
     model = Sequential(
         [
-            Input(shape=input_shape, name="input_layer"),
-            Conv2D(32, (3, 3), padding="same", activation="relu", name="conv1"),
-            BatchNormalization(name="bn1"),
-            MaxPooling2D(pool_size=(2, 2), name="pool1"),
-            Conv2D(64, (3, 3), padding="same", activation="relu", name="conv2"),
-            BatchNormalization(name="bn2"),
-            MaxPooling2D(pool_size=(2, 2), name="pool2"),
-            Conv2D(128, (3, 3), padding="same", activation="relu", name="conv3"),
-            BatchNormalization(name="bn3"),
-            MaxPooling2D(pool_size=(2, 2), name="pool3"),
-            Flatten(name="flatten"),
-            Dense(512, activation="relu", name="dense1"),
-            Dropout(0.5, name="dropout"),
-            Dense(num_classes, activation="softmax", name="output_layer"),
+            layers.Input(shape=input_shape, name="input_layer"),
+            layers.Conv2D(32, (3, 3), padding="same", activation="relu", name="conv1"),
+            layers.BatchNormalization(name="bn1"),
+            layers.Dropout(0.2, name="dropout1"),
+            layers.Conv2D(32, (3, 3), strides=2, padding="same", activation="relu", name="conv2"),
+            layers.BatchNormalization(name="bn2"),
+            layers.Dropout(0.3, name="dropout2"),
+            layers.Conv2D(64, (3, 3), padding="same", activation="relu", name="conv3"),
+            layers.BatchNormalization(name="bn3"),
+            layers.Conv2D(64, (3, 3), strides=2, padding="same", activation="relu", name="conv4"),
+            layers.BatchNormalization(name="bn4"),
+            layers.Dropout(0.4, name="dropout3"),
+            layers.Conv2D(128, (3, 3), padding="same", activation="relu", name="conv5"),
+            layers.BatchNormalization(name="bn5"),
+            layers.GlobalAveragePooling2D(name="gap"),
+            layers.Dense(256, activation="relu", kernel_regularizer=regularizers.l2(1e-4), name="dense1"),
+            layers.Dropout(0.5, name="dropout_final"),
+            layers.Dense(num_classes, activation="softmax", name="output_layer"),
         ],
-        name="Simple_CNN_v2",
+        name="Improved_CNN_CIFAR10",
     )
 
     print("\n" + "=" * 50)

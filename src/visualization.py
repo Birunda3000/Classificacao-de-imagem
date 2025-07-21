@@ -25,6 +25,8 @@ def plot_history(history: tf.keras.callbacks.History):
 
     Args:
         history (tf.keras.callbacks.History): O objeto retornado por model.fit().
+    Returns:
+        matplotlib.figure.Figure: O objeto da figura do Matplotlib.
     """
     acc = history.history['accuracy']
     val_acc = history.history['val_accuracy']
@@ -32,7 +34,7 @@ def plot_history(history: tf.keras.callbacks.History):
     val_loss = history.history['val_loss']
     epochs_range = range(len(acc))
 
-    plt.figure(figsize=(16, 6))
+    fig = plt.figure(figsize=(16, 6)) # Captura a figura explícitamente
     
     plt.subplot(1, 2, 1)
     plt.plot(epochs_range, acc, label='Acurácia de Treino')
@@ -51,49 +53,65 @@ def plot_history(history: tf.keras.callbacks.History):
     plt.ylabel('Perda')
     
     plt.suptitle('Histórico de Treino', fontsize=16, y=1.02)
-    plt.show()
-    return plt.gcf()  # Retorna a figura para possível salvamento posterior
+    
+    # REMOVA ESTA LINHA:
+    # plt.show()
+    
+    return fig  # Retorna a figura criada, não gcf()
 
 
 def plot_confusion_matrix(
     y_true_labels: np.ndarray, 
     y_pred_labels: np.ndarray,
-    title: str = "Matriz de Confusão Normalizada" # Adiciona o argumento de título
-):
+    title: str = "Matriz de Confusão Normalizada", # Adiciona o argumento de título
+    figsize: tuple = (12, 10) # Adiciona um argumento para o tamanho da figura (opcional)
+) -> plt.Figure: # Adiciona o tipo de retorno
     """
-    Plota uma matriz de confusão normalizada.
+    Gera e retorna uma figura da matriz de confusão normalizada.
 
     Args:
         y_true_labels (np.ndarray): Array com os rótulos verdadeiros.
         y_pred_labels (np.ndarray): Array com os rótulos previstos.
         title (str): O título do gráfico.
+        figsize (tuple): Tamanho da figura (largura, altura).
+
+    Returns:
+        matplotlib.figure.Figure: O objeto da figura do Matplotlib.
     """
     cm = confusion_matrix(y_true_labels, y_pred_labels)
-    cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+    cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis] # Normaliza por linha
 
-    plt.figure(figsize=(12, 10))
+    fig, ax = plt.subplots(figsize=figsize) # Cria a figura e os eixos explicitamente
     sns.heatmap(
         cm_normalized, 
         annot=True, 
         fmt=".2%", 
         cmap='Blues', 
         xticklabels=config.CLASS_NAMES, 
-        yticklabels=config.CLASS_NAMES
+        yticklabels=config.CLASS_NAMES,
+        ax=ax # Passa os eixos para o heatmap
     )
-    plt.title(title, fontsize=16) # Usa o título passado como argumento
-    plt.ylabel('Rótulo Verdadeiro')
-    plt.xlabel('Rótulo Previsto')
-    plt.show()
+    ax.set_title(title, fontsize=16) # Usa o título passado como argumento
+    ax.set_ylabel('Rótulo Verdadeiro')
+    ax.set_xlabel('Rótulo Previsto')
+    plt.tight_layout() # Ajusta o layout para evitar sobreposição
+
+    # REMOVA ESTA LINHA:
+    # plt.show()
+
+    return fig # RETORNE O OBJETO DA FIGURA
 
 
-def plot_model_filters(model: Model, layer_name: str, max_filters: int = 16):
+def plot_model_filters(model: Model, layer_name: str, max_filters: int = 16) -> plt.Figure:
     """
-    Visualiza os filtros (kernels) de uma camada convolucional específica.
+    Visualiza os filtros (kernels) de uma camada convolucional específica e retorna a figura.
 
     Args:
         model (Model): O modelo Keras treinado.
         layer_name (str): O nome da camada convolucional a ser visualizada.
         max_filters (int): Número máximo de filtros a serem exibidos.
+    Returns:
+        matplotlib.figure.Figure: O objeto da figura do Matplotlib.
     """
     try:
         layer = model.get_layer(name=layer_name)
@@ -109,7 +127,7 @@ def plot_model_filters(model: Model, layer_name: str, max_filters: int = 16):
         n_cols = 8
         n_rows = num_filters // n_cols + (1 if num_filters % n_cols else 0)
 
-        fig = plt.figure(figsize=(n_cols * 1.5, n_rows * 1.5))
+        fig = plt.figure(figsize=(n_cols * 1.5, n_rows * 1.5)) # Captura a figura explicitamente
         for i in range(num_filters):
             ax = fig.add_subplot(n_rows, n_cols, i + 1)
             ax.set_xticks([])
@@ -118,20 +136,29 @@ def plot_model_filters(model: Model, layer_name: str, max_filters: int = 16):
             ax.imshow(filters[:, :, :, i])
         
         fig.suptitle(f"Filtros da Camada '{layer_name}'", fontsize=16, y=1.02)
-        plt.show()
+        plt.tight_layout() # Ajusta o layout
+        
+        # REMOVA ESTA LINHA:
+        # plt.show()
+        
+        return fig # Retorna a figura criada
 
     except Exception as e:
         print(f"Não foi possível plotar os filtros para a camada '{layer_name}': {e}")
+        return None # Retorna None em caso de erro
 
 
-def plot_feature_maps(model: Model, layer_names: List[str], image: np.ndarray):
+def plot_feature_maps(model: Model, layer_names: List[str], image: np.ndarray) -> List[plt.Figure]:
     """
-    Visualiza os mapas de características (ativações) para uma imagem de entrada.
+    Visualiza os mapas de características (ativações) para uma imagem de entrada
+    e retorna uma lista de figuras.
 
     Args:
         model (Model): O modelo Keras treinado.
         layer_names (List[str]): Lista com os nomes das camadas a serem visualizadas.
         image (np.ndarray): A imagem de entrada (deve ter o shape esperado pelo modelo, ex: (1, 32, 32, 3)).
+    Returns:
+        List[matplotlib.figure.Figure]: Uma lista de objetos de figura do Matplotlib.
     """
     # Cria um sub-modelo que retorna as ativações das camadas desejadas
     activation_outputs = [model.get_layer(name).output for name in layer_names]
@@ -139,6 +166,8 @@ def plot_feature_maps(model: Model, layer_names: List[str], image: np.ndarray):
     
     # Obtém as ativações
     activations = activation_model.predict(image)
+    
+    figures = [] # Lista para armazenar as figuras
 
     for layer_name, layer_activation in zip(layer_names, activations):
         num_features = layer_activation.shape[-1]
@@ -146,7 +175,7 @@ def plot_feature_maps(model: Model, layer_names: List[str], image: np.ndarray):
         n_cols = 8
         n_rows = num_features // n_cols + (1 if num_features % n_cols else 0)
 
-        fig = plt.figure(figsize=(n_cols * 1.5, n_rows * 1.5))
+        fig = plt.figure(figsize=(n_cols * 1.5, n_rows * 1.5)) # Captura a figura explicitamente
         for i in range(num_features):
             ax = fig.add_subplot(n_rows, n_cols, i + 1)
             ax.set_xticks([])
@@ -155,4 +184,11 @@ def plot_feature_maps(model: Model, layer_names: List[str], image: np.ndarray):
             ax.imshow(layer_activation[0, :, :, i], cmap='viridis')
 
         fig.suptitle(f"Mapas de Características da Camada '{layer_name}'", fontsize=16, y=1.02)
-        plt.show()
+        plt.tight_layout() # Ajusta o layout
+        
+        # REMOVA ESTA LINHA:
+        # plt.show()
+        
+        figures.append(fig) # Adiciona a figura à lista
+        
+    return figures # Retorna a lista de figuras
