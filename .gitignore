@@ -1,7 +1,3 @@
-# Dados - Substitua 'data_for_compose/' pelo nome exato da sua pasta de dados
-# se você a colocar dentro do repositório.
-# Ou, se você usar um nome genérico como 'data':
-
 data/
 *.pickle
 *.csv
